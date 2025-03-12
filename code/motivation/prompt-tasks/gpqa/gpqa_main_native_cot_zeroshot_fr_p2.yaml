@@ -1,0 +1,5 @@
+dataset_kwargs:
+  data_files: /cpfs01/shared/XNLP_H800/gaochangjiang/workbench/reasoning/code/motivation/data/gpqa/gpqa_main_fr_p2.jsonl
+doc_to_text: "Quelle est la solution appropriée à cette question : {{Question}}\nChoix :\n(A) {{choice1}}\n(B) {{choice2}}\n(C) {{choice3}}\n(D) {{choice4}}\nExaminons cela pas à pas : "
+include: _gpqa_native_cot_zeroshot_yaml
+task: xgpqa_main_native_cot_zeroshot_fr_p2

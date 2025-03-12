@@ -1,0 +1,8 @@
+group: xgpqa_main_native_cot_zeroshot_llama
+task:
+  - xgpqa_main_native_cot_zeroshot_fr
+  - xgpqa_main_native_cot_zeroshot_ko
+  - xgpqa_main_native_cot_zeroshot_sw
+  - xgpqa_main_native_cot_zeroshot_vi
+metadata:
+  version: 1.0

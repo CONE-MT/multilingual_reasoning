@@ -1,0 +1,20 @@
+group: xmgsm_native_cot_en_para
+task:
+  - xmgsm_native_cot_en_p1
+  - xmgsm_native_cot_en_p2
+  - xmgsm_native_cot_en_p3
+  - xmgsm_native_cot_en_p4
+  - xmgsm_native_cot_en_p5
+  - xmgsm_native_cot_en_p6
+  - xmgsm_native_cot_en_p7
+  - xmgsm_native_cot_en_p8
+  - xmgsm_native_cot_en_p9
+  - xmgsm_native_cot_en_p10
+  - xmgsm_native_cot_en_p11
+  - xmgsm_native_cot_en_p12
+  - xmgsm_native_cot_en_p13
+  - xmgsm_native_cot_en_p14
+  - xmgsm_native_cot_en_p15
+  - xmgsm_native_cot_en_p16
+metadata:
+  version: 3.0

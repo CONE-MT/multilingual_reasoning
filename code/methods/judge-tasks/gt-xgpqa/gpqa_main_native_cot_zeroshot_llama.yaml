@@ -1,0 +1,8 @@
+group: xgpqa_main_google_native_cot_zeroshot_llama
+task:
+  - xgpqa_main_google_native_cot_zeroshot_en
+  - xgpqa_main_google_native_cot_zeroshot_hu
+  - xgpqa_main_google_native_cot_zeroshot_de
+  - xgpqa_main_google_native_cot_zeroshot_ru
+metadata:
+  version: 1.0

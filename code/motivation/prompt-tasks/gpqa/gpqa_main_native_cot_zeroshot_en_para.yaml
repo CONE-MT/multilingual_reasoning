@@ -1,0 +1,20 @@
+group: xgpqa_main_native_cot_zeroshot_en_para
+task:
+  - xgpqa_main_native_cot_zeroshot_en_p1
+  - xgpqa_main_native_cot_zeroshot_en_p2
+  - xgpqa_main_native_cot_zeroshot_en_p3
+  - xgpqa_main_native_cot_zeroshot_en_p4
+  - xgpqa_main_native_cot_zeroshot_en_p5
+  - xgpqa_main_native_cot_zeroshot_en_p6
+  - xgpqa_main_native_cot_zeroshot_en_p7
+  - xgpqa_main_native_cot_zeroshot_en_p8
+  - xgpqa_main_native_cot_zeroshot_en_p9
+  - xgpqa_main_native_cot_zeroshot_en_p10
+  - xgpqa_main_native_cot_zeroshot_en_p11
+  - xgpqa_main_native_cot_zeroshot_en_p12
+  - xgpqa_main_native_cot_zeroshot_en_p13
+  - xgpqa_main_native_cot_zeroshot_en_p14
+  - xgpqa_main_native_cot_zeroshot_en_p15
+  - xgpqa_main_native_cot_zeroshot_en_p16
+metadata:
+  version: 1.0

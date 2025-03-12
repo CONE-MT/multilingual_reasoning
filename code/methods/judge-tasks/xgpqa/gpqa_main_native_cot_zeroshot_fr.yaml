@@ -1,0 +1,5 @@
+dataset_kwargs:
+  data_files: /cpfs01/shared/XNLP_H800/huangxu/xeval/data/gpqa/gpqa_human_fr.jsonl
+doc_to_text: "Quelle est la bonne réponse à cette question : {{Question}}\nChoix :\n(A) {{choice1}}\n(B) {{choice2}}\n(C) {{choice3}}\n(D) {{choice4}}\nRéfléchissons étape par étape : "
+include: _gpqa_native_cot_zeroshot_yaml
+task: xgpqa_main_native_cot_zeroshot_fr

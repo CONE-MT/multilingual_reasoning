@@ -1,0 +1,5 @@
+dataset_kwargs:
+  data_files: /cpfs01/shared/XNLP_H800/huangxu/xeval/data/gpqa/gpqa_human_sr.jsonl
+doc_to_text: "Који је тачан одговор на ово питање: {{Question}}\nИзбори:\n(A) {{choice1}}\n(B) {{choice2}}\n(C) {{choice3}}\n(D) {{choice4}}\nХајде да размислимо корак по корак: "
+include: _gpqa_native_cot_zeroshot_yaml
+task: xgpqa_main_native_cot_zeroshot_sr

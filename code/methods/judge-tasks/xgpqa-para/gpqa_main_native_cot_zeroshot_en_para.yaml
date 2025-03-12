@@ -1,0 +1,8 @@
+group: xgpqa_main_native_cot_zeroshot_en_para
+task:
+  - xgpqa_main_native_cot_zeroshot_en_p1
+  - xgpqa_main_native_cot_zeroshot_en_p2
+  - xgpqa_main_native_cot_zeroshot_en_p3
+  - xgpqa_main_native_cot_zeroshot_en_p4
+metadata:
+  version: 1.0
