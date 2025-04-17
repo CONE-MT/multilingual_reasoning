@@ -16,5 +16,6 @@ task:
   - xgpqa_main_native_cot_zeroshot_en_p14
   - xgpqa_main_native_cot_zeroshot_en_p15
   - xgpqa_main_native_cot_zeroshot_en_p16
+  - xgpqa_main_native_cot_zeroshot_en_p17
 metadata:
   version: 1.0

@@ -18,6 +18,7 @@ parser.add_argument("--ens", help="en runs", default="en1357,en2468,en1234,en234
 parser.add_argument("--non_ens", help="languages", default="ar,bn,cs,de,es,fr,hu,ja,ko,ru,sr,sw,te,th,vi,zh")
 parser.add_argument("--task", help="xgpqa or xmgsm")
 parser.add_argument("--model", help="name of the evaluated model", default="qwen")
+parser.add_argument("--model_size", help="name of the evaluated model", default="72B")
 parser.add_argument("--k_en", help="how many en runs to aggregate", default="2")
 parser.add_argument("--k_non_en", help="how many non-en languages to aggregate", default="2")
 parser.add_argument("--vote", help="whether to vote", default="True")
@@ -36,14 +37,15 @@ if "gt-" not in task:
 else:
     task_prefix = 'samples_xgpqa_main_google_native_cot_zeroshot' if 'xgpqa' in task else 'samples_xmgsm_native_cot_google'
 
+model_size = args.model_size
 if args.model == 'qwen':
-    model_size = '72B'
+    # model_size = '72B'
     model = f'Qwen2.5-{model_size}-Instruct'
 elif args.model == 'llama':
-    model_size = '70B'
+    # model_size = '70B'
     model = f'Llama-3.1-{model_size}-Instruct'
 elif args.model == 'r1-llama':
-    model_size = '70B'
+    # model_size = '70B'
     model = f'DeepSeek-R1-Distill-Llama-{model_size}'
 else:
     raise NotImplementedError(f"Unknown model: {args.model}")

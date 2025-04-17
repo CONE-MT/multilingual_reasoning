@@ -43,15 +43,13 @@ else
     fi
 fi
 
-PATH_TASKS=../BenchMAX/tasks
+# PATH_TASKS=../BenchMAX/tasks
+PATH_TASKS=/cpfs01/shared/XNLP_H800/huangxu/xeval/tasks
 PATH_MODELS=../../hf_hub
 
 mv log/${PREFIX}_${LANG}.jsonl log/${PREFIX}_${LANG}0.jsonl
 
-for SEED in 2048
-# for SEED in 1357 2468 1234 2345
-# for SEED in 1358 1359 1360 2469 2470 2471 1235 1236 1237 2346 2347 2348
-# for SEED in 1357 2468 1234 2345 1358 1359 1360 2469 2470 2471 1235 1236 1237 2346 2347 2348
+for SEED in 1357 2468 1234 2345 1358 1359 1360 2469 2470 2471 1235 1236 1237 2346 2347 2348 2048
 do
     if [[ "$TRANSLATE" == "google" ]]; then
         echo "*** GOOGLE TRANSLATE !!!! ***"

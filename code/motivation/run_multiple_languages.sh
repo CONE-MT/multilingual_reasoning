@@ -42,7 +42,8 @@ else
     fi
 fi
 
-PATH_TASKS=../BenchMAX/tasks
+# PATH_TASKS=../BenchMAX/tasks
+PATH_TASKS=/cpfs01/shared/XNLP_H800/huangxu/xeval/tasks
 PATH_MODELS=../../hf_hub
 
 if [[ "$TRANSLATE" == "google" ]]; then

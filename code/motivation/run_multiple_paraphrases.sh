@@ -27,7 +27,7 @@ else
     exit
 fi
 
-PATH_TASKS=./prompt_tasks
+PATH_TASKS=/cpfs01/shared/XNLP_H800/gaochangjiang/workbench/reasoning/code/motivation/prompt-tasks
 PATH_MODELS=../../hf_hub
 
 if [[ "$TASK" == "gpqa" ]]; then

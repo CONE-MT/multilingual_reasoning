@@ -34,6 +34,8 @@ elif args.model == 'llama':
     model = f'Llama-3.1-{model_size}-Instruct'
 elif args.model == 'r1-llama':
     model = f'DeepSeek-R1-Distill-Llama-{model_size}'
+elif args.model == 'gpt-4o':
+    model = 'gpt-4o'
 else:
     raise NotImplementedError(f"Unknown model: {args.model}")
 task_suffix = f'_{model}_trans' if "st-" in task else ""

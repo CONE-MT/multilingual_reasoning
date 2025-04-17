@@ -70,11 +70,8 @@ llm = LLM(
 # paras = ['p1', 'p2', 'p3', 'p4']
 # seeds = [1357, 2468, 1234, 2345]
 
-paras = ['p17']
-seeds = [2048]
-
-# paras = [f'p{k}' for k in range(1, 17)]
-# seeds = [1357, 2468, 1234, 2345, 1235, 1236, 1237, 1358, 1359, 1360, 2346, 2347, 2348, 2469, 2470, 2471, 2048]
+paras = [f'p{k}' for k in range(1, 17)]
+seeds = [1357, 2468, 1234, 2345, 1235, 1236, 1237, 1358, 1359, 1360, 2346, 2347, 2348, 2469, 2470, 2471, 2048]
 
 for para, seed in zip(paras, seeds):
     sampling_params = SamplingParams(

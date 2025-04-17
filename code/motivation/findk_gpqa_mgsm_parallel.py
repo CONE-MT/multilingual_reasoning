@@ -18,6 +18,7 @@ parser.add_argument("--langs", help="languages", default="ar,bn,cs,de,en,es,fr,h
 # parser.add_argument("--langs", help="languages", default="en_p1,en_p2,en_p3,en_p4,en_p5,en_p6,en_p7,en_p8,en_p9,en_p10,en_p11,en_p12,en_p13,en_p14,en_p15,en_p16,en_p17")
 parser.add_argument("--task", help="xgpqa or xmgsm")
 parser.add_argument("--model", help="name of the evaluated model", default="qwen")
+parser.add_argument("--model_size", help="Parameter size in billions")
 parser.add_argument("--k", help="how many languages to aggregate", default="4")
 parser.add_argument("--vote", help="whether to vote", default="True")
 parser.add_argument("--save", default="False")
@@ -31,15 +32,18 @@ if "gt-" not in task:
 else:
     task_prefix = 'samples_xgpqa_main_google_native_cot_zeroshot' if 'xgpqa' in task else 'samples_xmgsm_native_cot_google'
 
+model_size = args.model_size
 if args.model == 'qwen':
-    model_size = '72B'
+    # model_size = '72B'
     model = f'Qwen2.5-{model_size}-Instruct'
 elif args.model == 'llama':
-    model_size = '70B'
+    # model_size = '70B'
     model = f'Llama-3.1-{model_size}-Instruct'
 elif args.model == 'r1-llama':
-    model_size = '70B'
+    # model_size = '70B'
     model = f'DeepSeek-R1-Distill-Llama-{model_size}'
+elif args.model == 'gpt-4o':
+    model = 'gpt-4o'
 else:
     raise NotImplementedError(f"Unknown model: {args.model}")
 task_suffix = f'_{model}_trans' if "st-" in task else ""
@@ -126,7 +130,7 @@ for lang in langs:
     correct_ints = correct_dict[lang]
     acc = sum(correct_ints) / len(correct_ints)
     acc_dict[lang] = acc
-# print(f"Mean acc: {np.mean(list(acc_dict.values())):.3%}")
+print(f"Mean acc: {np.mean(list(acc_dict.values())):.3%}")
 # exit()
 # prepare for calculating pass@k
 all_lang_correct_ints = np.array([correct_dict[lang] for lang in langs])  # n_lang, n_sample
@@ -167,8 +171,8 @@ def process_all_combos(batchsize):
     n_combinations = len(combo_tuples)  # total number of combos
     
     n_batches = n_combinations // batchsize if n_combinations % batchsize == 0 else n_combinations // batchsize + 1
-    # for i_batch in tqdm(range(n_batches), desc="batchs"):
-    for i_batch in range(n_batches):
+    for i_batch in tqdm(range(n_batches), desc="batchs"):
+    # for i_batch in range(n_batches):
         # breakpoint()
         # print(f"Batch {i_batch + 1} out of {n_batches}")
         idx_start = i_batch * batchsize
@@ -206,26 +210,27 @@ if __name__ == "__main__":
     
         best_k_langs = max(passk_dict, key=passk_dict.get)
         best_passk = passk_dict[best_k_langs]
-        accs = [f"{acc:.3%}" for acc in [acc_dict[lang] for lang in best_k_langs.split(',')]]
-        # if do_vote:
-        #     print(f"Best languages: {best_k_langs}\nAcc: {', '.join(accs)}\nPass@k: {best_passk:.3%}\nVoted acc: {vote_acc_dict[best_k_langs]:.3%}\nConsistency: {vote_const_dict[best_k_langs]:.3%}")
-        # else:
-        #     print(f"Best languages: {best_k_langs}\nAcc: {', '.join(accs)}\nPass@k: {best_passk:.3%}")
-        #     # pass
+        acc_values = [acc for acc in [acc_dict[lang] for lang in best_k_langs.split(',')]]
+        accs = [f"{acc:.3%}" for acc in acc_values]
+        if do_vote:
+            print(f"Best languages: {best_k_langs}\nAcc: {', '.join(accs)}\nPass@k: {best_passk:.3%}\nVoted acc: {vote_acc_dict[best_k_langs]:.3%}\nConsistency: {vote_const_dict[best_k_langs]:.3%}")
+        else:
+            print(f"Best languages: {best_k_langs}\nAcc: {', '.join(accs)}\nAcc Mean: {np.mean(acc_values):.3%}\nPass@k: {best_passk:.3%}")
+            # pass
 
         worst_k_langs = min(passk_dict, key=passk_dict.get)
         worst_passk = passk_dict[worst_k_langs]
-        accs = [f"{acc:.3%}" for acc in [acc_dict[lang] for lang in worst_k_langs.split(',')]]
-        # if do_vote:
-        #     print(f"\nWorst languages: {worst_k_langs}\nAcc: {', '.join(accs)}\nPass@k: {worst_passk:.3%}\nVoted acc: {vote_acc_dict[worst_k_langs]:.3%}\nConsistency: {vote_const_dict[worst_k_langs]:.3%}")
-        # else:
-        #     print(f"\nWorst languages: {worst_k_langs}\nAcc: {', '.join(accs)}\nPass@k: {worst_passk:.3%}")
-        #     # pass
+        acc_values = [acc for acc in [acc_dict[lang] for lang in worst_k_langs.split(',')]]
+        accs = [f"{acc:.3%}" for acc in acc_values]
+        if do_vote:
+            print(f"\nWorst languages: {worst_k_langs}\nAcc: {', '.join(accs)}\nPass@k: {worst_passk:.3%}\nVoted acc: {vote_acc_dict[worst_k_langs]:.3%}\nConsistency: {vote_const_dict[worst_k_langs]:.3%}")
+        else:
+            print(f"\nWorst languages: {worst_k_langs}\nAcc: {', '.join(accs)}\nAcc Mean: {np.mean(acc_values):.3%}\nPass@k: {worst_passk:.3%}")
+            # pass
         
 
         avg_passk = np.mean(list(passk_dict.values()))
-        # print(f"Average pass@k: {avg_passk:.3%}")
-        # print(f"{best_passk:.3%};{avg_passk:.3%}")
+        print(f"Average pass@k: {avg_passk:.3%}")
         
         if do_vote:
             best_vote_acc = np.max(list(vote_acc_dict.values()))
@@ -234,12 +239,15 @@ if __name__ == "__main__":
             avg_vote_acc = np.mean(list(vote_acc_dict.values()))
             avg_vote_const = np.mean(list(vote_const_dict.values()))
             
-            # print(f"Best voted acc: {best_vote_acc:.3%}")
-            # print(f"Worst voted acc: {worst_vote_acc:.3%}")
-            # print(f"Average voted acc: {avg_vote_acc:.3%}")
-            # print(f"Average consistency: {avg_vote_const:.3%}")
+            print(f"Best voted acc: {best_vote_acc:.3%}")
+            print(f"Worst voted acc: {worst_vote_acc:.3%}")
+            print(f"Average voted acc: {avg_vote_acc:.3%}")
+            print(f"Average consistency: {avg_vote_const:.3%}")
             
-            print(f"{best_vote_acc:.3%};{avg_vote_acc:.3%}")
+        #     print(f"{best_vote_acc:.3%};{avg_vote_acc:.3%}")
+        # else:
+        #     print(f"{best_passk:.3%};{avg_passk:.3%}")
+            
         
         passk_scores_array = np.array(list(passk_dict.values()))
         votek_scores_array = np.array(list(vote_acc_dict.values()))
